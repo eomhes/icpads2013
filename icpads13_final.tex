@@ -57,7 +57,7 @@ wide-area environments to evaluate the performance improvement and
 energy implications of the proposed offloading framework.
 %
 Our results show that, depending on the complexity of the workload and
-the amount of data transfer, the proposed architecture achieves more
+the amount of data transfer, the proposed architecture can achieve more
 energy efficient performance by offloading than executing locally.
 \end{abstract}
 
@@ -150,7 +150,7 @@ cluster environments.
 %
 Moreover, since workloads are traversing untrusted networks in the
 wide-area, a layer of network encryption is necessary to ensure privacy
-and some level of trust of the results from the remote compute node.\\
+and some level of the trust of the results from the remote compute node.\\
 %
 \indent This paper presents an OpenCL-based remote offloading framework designed
 specifically for mobile cloud computing where OpenCL workloads can be exported
@@ -186,7 +186,7 @@ seamlessly offload computation to the virtual accelerators.\\
 %manages the transfer of necessary state and returns the result back to the 
 %application.
 %
-\indent An additional contribution is a distributed method of resource management 
+\indent An additional contribution of this work is a distributed method of resource management 
 which handles service discovery, access control, and data privacy.
 %
 Past mobile offloading solutions have not investigated a service discovery 
@@ -314,10 +314,10 @@ device.
 For example, if the mobile device is connected to a virtual network 
 consisting of an Amazon EC2 GPU instance, and the workstation of the
 mobile user, our extensions to the OpenCL framework will automatically 
-select the best candidate based on available device capabilities, and 
+select the best candidate based on available device capabilities and 
 network conditions as the target compute node for remote execution.
 %
-Also, the use of SocialVPN ensures that computation is offloaded securely
+Also, the use of SocialVPN ensures that the computation is offloaded securely
 to socially trusted nodes.
 %
 This enhancement occurs transparently to the developer and the user 
@@ -334,7 +334,7 @@ We aim to extend the umbrella of heterogeneous computing to include devices
 beyond the physical host platform.
 %
 Currently, many software developers utilize the OpenCL framework to exploit 
-onboard heterogeneous platforms.
+on-board heterogeneous platforms.
 %
 Popular software projects, such as OpenCV and OpenSSL, are re-implementing
 major portions of their functions to run on the OpenCL
@@ -360,8 +360,8 @@ for heterogeneous computing.
 %
 \section{Offloading Framework}
 %
-Our overall architecture consists of four main modules: integration with the 
-OpenCL API, RPC-based offloading mechanism, decentralized resource discovery 
+Our overall architecture consists of five main modules: integration with the 
+OpenCL API, RPC-based offloading mechanism, runtime scheduler, decentralized resource discovery 
 feature, and trusted, private IP communication layer.
 %
 The overall system architecture is shown in Figure 2.
@@ -373,7 +373,7 @@ device manufacturers, we chose not to deviate from their API in order to
 minimize the learning curve for developers. 
 %
 Latest revisions of the OpenCL specification are extending the coverage to 
-enable integration of a large pool of heterogeneous hardware under the API.
+enable integration of a large pool of heterogeneous hardwares under the API.
 %
 Because OpenCL is also a hardware level offloading framework, it provides 
 various functions that we can leverage in our system.
@@ -391,10 +391,10 @@ offloading.\\
 %
 \indent\textbf{Discovery and Enumeration.}
 In the initialization phase of the interface, the developer queries the 
-platform for onboard OpenCL-capable accelerators.
+platform for on-board OpenCL-capable accelerators.
 %
 The OpenCL framework returns a list of accessible compute devices located 
-onboard the device along with their capabilities (e.g. graphics cards, video 
+on-board the device along with their capabilities (e.g. graphics cards, video 
 decoders, cryptographic devices).
 %
 We extend this portion of the API by allowing the developer to discover other 
@@ -462,7 +462,7 @@ If an error occurs due to an issue with the source code, or the workload
 configuration, or any other hardware issues, an appropriate error code is 
 returned to the developer.
 %
-In return, the developer can release the various resources (i.e. buffers, 
+In return, the developer can release the various resources (e.g. buffers, 
 device handles) that are associated with the job.
 %
 Once again, we extend this functionality to support network failures as well.
@@ -619,7 +619,7 @@ offloading framework for mobile platforms in terms of the performance
 improvement and energy consumption for mobile devices through real deployment
 over local- and wide-area environments.
 %
-Firstly, we examine the overhead of adopting SocialVPN to the secure 
+We first examine the overhead of adopting SocialVPN to the secure 
 communication between the client and the server since SocialVPN utilizes 
 its own encryption and IP tunneling.
 %
@@ -633,16 +633,18 @@ In order to evaluate our remote offloading framework under a variety of
 possible use case scenarios, we setup the experiment using various hardware
 and network configurations.
 %
-First of all, our hardware setup consists of a client and two server types.
+First of all, our hardware setup consists of a client and three server types.
 %
 For the mobile client, we utilized an Android tablet, Samsung GalaxyTab 10.1 
 equipped with 1GHz dual-core processor and 1GB RAM, and running Android 3.1.
 %
 One of the servers is a workstation with an Intel 3.0 GHz Core2 Duo
-processor running Ubuntu 12.04 with 8GB RAM and an Nvidia Geforce GT 640
-GPU with 2GB RAM.
+processor running Ubuntu 12.04 with 8GB RAM.
 %
-The other server is an Amazon EC2 GPU instance with 16 vCPUs, 22.5GB RAM,
+Second server has same features as first server, but it is equipped with
+an Nvidia Geforce GT 640 GPU with 2GB RAM.
+%
+Last configuration for the server is an Amazon EC2 GPU instance with 16 vCPUs, 22.5GB RAM,
 and two Nvidia Tesla GPUs running Ubuntu 12.04.
 %
 We ran our experiments on the different networks: 1) a LAN within the lab
@@ -661,7 +663,7 @@ We selected four workloads each with different characteristics.
 classify it as a high state transfer and low computation workload.
 %
 The second workload is an \textit{Hidden-Markov} model workload, a popular
-statistical tools for modeling sequences as well machine learning;
+statistical tools for modeling sequences as well as machine learning;
 this represents a low state transfer and high computation workload.
 %
 We also tested a \textit{matrix multiplication} as one of the workloads because
@@ -672,7 +674,7 @@ mathematical simulation method for modeling astronomical objects;
 this is considered a high state transfer and high computation workload.
 %
 These workloads provide some insight into which use cases best fit our
-mobile cloud offloading scenario through the use of our OpenCL framework.
+mobile cloud offloading scenario through our OpenCL-based offloading framework.
 %
 \begin{figure}
 \centering
@@ -698,7 +700,8 @@ In this section, we investigate the overhead of SocialVPN with respect to
 the performance and energy consumption.
 %
 In order to measure the overhead of SocalVPN, we have conducted the 
-LAN experiments in which the client offloads OpenCL workloads to the server
+LAN experiments in which the client offloads an OpenCL
+workload (Sobelfilter) to the server
 both with and without SocialVPN.
 %
 As shown in Figure 4 and 5, as the image size increases, the execution time 
@@ -716,7 +719,7 @@ terms of energy consumption.
 %
 As mentioned above, we have utilized three types of servers for the 
 different server’s computing capabilities: CPU only-installed server, 
-GPU-installed server and AmazonEC2 GPU cluster instance.
+GPU-installed server and Amazon EC2 GPU cluster instance.
 %
 For various network configurations, we used a local area network in which
 the client and the server directly connect via a wireless router, and a wide 
@@ -726,7 +729,8 @@ For Sobelfilter and matrix multiplication, we varied the image and matrix
 sizes to measure the impact of the amount of data transfer and computation.
 %
 Also, Sobelfilter and matrix multiplication require 7 and 8 of one-time 
-argument setup calls, respectively.
+argument setups through the API called \textit{clSetKernelArgs} which causes additional
+overhead to setup the extra arguments for kernel executions, respectively.
 %
 For hidden Markov model, the different number of states is used to vary 
 the size of input; however, the kernel execution is repeated 100 times each 
@@ -735,8 +739,8 @@ setup calls) which make the hidden Markov model workload most
 communication-intensive.
 %
 In contrast with other workloads, however, N-body physics varies the 
-number of the iterations that the kernel is executed on the server while a
-same data set is processed for each iteration.
+number of the iterations that the kernel is executed on the server with
+a same data set processed for each iteration.
 %
 Thus, regardless of the number of iterations, the size of input and output
 data is identical, but as the number of iterations increases, the number of
@@ -751,7 +755,7 @@ since the server has relatively low latency to the mobile client, and more
 powerful computing capabilities.
 %
 On the other hand, when the workload is offloaded over the wide-area to
-AmazonEC2 GPU VM instance, the total execution time takes longer than
+Amazon EC2 GPU VM instance, the total execution time takes longer than
 local processing.
 %
 In the wide-area scenario, the low bandwidth and high latency adversely
@@ -770,28 +774,28 @@ In fact, the computation for matrix multiplication has higher complexity
 than Sobelfilter (the computation complexity for matrix multiplication is
 \textit{O}($n^{3}$) 
 while Sobelfilter is \textit{O}($n^{2}$)), which means that matrix multiplication is able
-to gain more from offloading to the server with more powerful compute node.
+to gain more from offloading to the remote server.
 %
-Similarly as in the case of the small image size for Sobelfilter, offloading
-the small size of matrix multiplication is slower than local
+Similarly as in the case of the small image size (i.e. 480$\times$270) for Sobelfilter, offloading
+the small size of matrix multiplication (i.e. 160$\times$320) is slower than local
 processing.\\
 %
 \indent Interestingly, in the case of hidden Markov model in Figure 6(c), 
-the worst performance is shown when the workload is offloaded to AmazonEC2. 
+the worst performance is shown when the workload is offloaded to Amazon EC2. 
 %
 In order to execute hidden Markov model, the kernel is repeatedly executed 
 requiring additional communication for each iteration.
 %
-Consequently, offloading to AmazonEC2, which has the highest latency 
+Consequently, offloading to Amazon EC2, which has the highest latency 
 among our experimental setup, takes the longest time.
 %
 In addition, N-body physics structured with the same program-flow as hidden
 Markov model presents the similar pattern of the performance.
 %
-Offloading to AmazonEC2 has worse performance than offloading to other 
+Offloading to Amazon EC2 has worse performance than offloading to other 
 server due to the high latency between the client and the server, but faster
 than local processing which means that it is still more beneficial to
-offloading to AmazonEC2 than local processing if no local peer is
+offloading to Amazon EC2 than local processing if no local peer is
 available.\\
 %
 \indent\textbf{Energy Consumption.}
@@ -804,7 +808,7 @@ display, and GPS receiver.
 Every experiment is repeated 5 times and the results presented in the paper
 are the averaged values.
 %
-Note that though some cases for Sobelfilter showed the benefits from 
+Note that even though some cases for Sobelfilter showed the benefits from 
 offloading in terms of the total execution time, offloading consumes more
 energy than local processing as shown in Figure 7(a).
 %
@@ -862,12 +866,13 @@ Energy consumption with various server setup}
 %
 The research community has been investigating different methods to
 offload computation for decades; however, remote execution to the cloud
-has created new opportunities to explore some novel offloading solutions.
+has created new opportunities to explore novel offloading solutions.
 %
 In this section, we discuss the most recent proposals for mobile
-computation offloading which fall in the following categories:
-application partitioning, thread, application migration and distributed
-offloading framework.\\
+computation offloading.\\
+%which fall in the following categories:
+%application partitioning, thread, application migration and distributed
+%offloading framework.\\
 %
 \indent\textbf{Application Partitioning.} This approach involves selecting
 portions of an application to execute remotely through the use of a
@@ -876,7 +881,7 @@ static or dynamic scheduler.
 In Spectra~\cite{spectra}, developers identify functions in the
 application that can be offloaded to a remote server over RPC.
 %
-By monitoring the CPU, file system, and bandwidth, Spectra dynamically
+By monitoring the CPU, file I/O, and bandwidth, Spectra 
 decides at runtime which portions of the application should run locally
 or remotely.
 %
@@ -887,12 +892,12 @@ method attributes, and the Reflection API.
 Through the .NET Framework's virtual machine, MAUI is able to
 dynamically serialize and ship \textit{remotable} methods and data to a
 server proxy, thus leveraging the server's superior processing
-capabilities while saving power on the mobile device.
+capabilities while saving energy on the mobile device.
 %
 Cuckoo~\cite{cuckoo} takes a slightly modified approach by focusing more
 on integrating with the Eclipse IDE; however, it requires developers to
 implement both local and remote versions of their functionality, whereas
-MAUI only requires annotations instead of a different implementation.
+MAUI only requires annotations from developers.
 %
 Our approach may be classified as application partitioning similar to
 Cuckoo because developers are required to re-implement portions of their
@@ -906,7 +911,7 @@ thread and process migration, on the other hand, can be achieved without
 any source code modification.
 %
 CloneCloud~\cite{clonecloud} achieves this by employing thread migration
-in the Dalvik Java virtual machine (JVM) by transferring all of the
+in the Dalvik Java Virtual Machine (JVM) by transferring all of the
 thread state (thread stack, necessary heap objects and registers) to the
 remote virtual machine.
 %
@@ -921,16 +926,16 @@ Our proposed solution does not require any thread stack or heap
 synchronization because the OpenCL framework requires explicit
 declaration of input and output buffers for remote kernel execution.\\
 %
-\indent\textbf{Application Migration.} The previous thread migration techniques
+\indent\textbf{Application Migration.} While the previous thread migration techniques
 can be technically challenging to implement since they require memory
 synchronization between the remote thread and other threads running
-locally.
+locally, Application migration does not have such requirements.
 %
-All local threads have to block on "dirty" regions of the heap that has
-been offloaded to the remote server until the remote execution finishes
-and the memory is merged and released.
+%All local threads have to block on "dirty" regions of the heap that has
+%been offloaded to the remote server until the remote execution finishes
+%and the memory is merged and released.
 %
-Application migration does not have such requirements.
+%Application migration does not have such requirements.
 %
 Hung et al.~\cite{hung} describes an application migration design that
 leverages the \textit{onResume} and \textit{onPause} events of an
@@ -939,7 +944,7 @@ Android application as the markers for process migration.
 The \textit{onPause} event occurs when a user switches to another
 application.
 %
-The Android system requires that application states are saved on
+The Android system requires that application states are stored on
 persistent storage in case the operating system decides to shutdown in
 the case of low memory situation.
 %
@@ -988,16 +993,16 @@ and transparently discover the resources through IP multicasting on top
 of SocialVPN.
 %
 Also, we characterized the benefits and the costs of our framework in
-terms of total execution time and energy consumption though real
+terms of total execution time and energy consumption through real
 deployment of the prototype in local- and wide-area networks.
 %
 According to our evaluation, depending on the complexity of the workload
-and the amount data transfer, the proposed architecture achieves more
+and the amount of data transfer, the proposed architecture can achieve more
 energy efficient performance by offloading than executing locally.
 %
-In fact, in the case of matrix multiplication, which is the
+In fact, in the case of matrix multiplication which is the
 computation-intensive workload, offloading shows up to 9.2X speedup
-depending on matrix size, server's computing capabilities and network
+depending on the matrix size, server's computing capabilities and network
 conditions while it saves energy consumption up to 76.8\%.\\
 %
 \indent We currently seek to real mobile applications suitable to obtain the
